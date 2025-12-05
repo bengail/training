@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SWAP — Plans</title>
+  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:14px">
+        <h1>SWAP</h1>
+        <nav aria-label="Main navigation">
+          <a href="index.html">Bibliothèque</a>
+          <a href="plans.html">Plans</a>
+        </nav>
+      </div>
+      <nav aria-label="page-actions">
+        <a href="index.html">Retour bibliothèque</a>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <aside id="plansListPane">
+      <h2>Plans disponibles</h2>
+      <ul id="plansList"></ul>
+    </aside>
+    <section id="planDetailPane">
+      <div id="planViewPlaceholder">Sélectionne un plan pour l'afficher</div>
+      <div id="planDetail" class="hidden">
+        <h2 id="planTitle"></h2>
+        <div class="plan-actions">
+          <label for="workoutPick">Ajouter workout :</label>
+          <select id="workoutPick"></select>
+          <button id="addWorkout">Ajouter au plan</button>
+          <button id="downloadMeta">Télécharger meta JSON</button>
+        </div>
+        <div id="planMarkdown"></div>
+        <h3>Workouts associés</h3>
+        <ul id="attachedWorkouts"></ul>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="plans.js"></script>
+  <script>
+    (function(){
+      try{
+        const anchors = document.querySelectorAll('header nav a');
+        anchors.forEach(a=>{
+          const href = a.getAttribute('href');
+          if(window.location.pathname.endsWith(href) || window.location.pathname===('/'+href)){
+            a.classList.add('active');
+          }
+        });
+      }catch(e){}
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,236 @@
+{
+  "library_enriched": [
+    {
+      "id": "warmup_cooldown",
+      "name": "Échauffement / Retour au calme",
+      "summary": "Séance d'activation et de retour au calme avec accélérations courtes pour préparer la foulée.",
+      "purpose": "préparer ou revenir au calme (activation neuromusculaire et circulation)",
+      "effects": "Augmente la température musculaire, active le système nerveux moteur, améliore la qualité des efforts courts et réduit le risque de blessure lorsqu'utilisé correctement.",
+      "icu_workout": {
+        "steps": [
+          {"type": "Warmup", "duration": 900, "target": {"type": "power", "zone": 2}},
+          {"type": "TextEvent", "message": "6 x accélérations 20-30s à la fin de l'échauffement"},
+          {"type": "Cooldown", "duration": 600, "target": {"type": "power", "zone": 1}}
+        ]
+      }
+    },
+    {
+      "id": "easy_run",
+      "name": "Sortie facile (Z1–Z2)",
+      "summary": "Course facile en endurance fondamentale pour récupération et développement aérobie.",
+      "purpose": "récupération / base aérobie",
+      "effects": "Améliore la capacité aérobie de base (mitochondries, capillarisation), facilite le retour après séances intenses et augmente la tolérance au volume d'entraînement.",
+      "icu_workout": {
+        "steps": [
+          {"type": "SteadyState", "duration": 3600, "target": {"type": "power", "zone": 2}},
+          {"type": "TextEvent", "message": "Effort conversationnel, garder la technique"}
+        ]
+      }
+    },
+    {
+      "id": "long_run",
+      "name": "Sortie longue",
+      "summary": "Sortie longue axée endurance et pratique du ravitaillement ; possibilité d'insérer blocs tempo.",
+      "purpose": "endurance et pratique ravitaillement",
+      "effects": "Développe l'endurance musculaire et métabolique (utilisation des graisses, économie), habitue le coureur à la fatigue et à la stratégie nutritionnelle pour épreuves longues.",
+      "icu_workout": {
+        "steps": [
+          {"type": "Warmup", "duration": 1800, "target": {"type": "power", "zone": 2}},
+          {"type": "SteadyState", "duration": 7200, "target": {"type": "power", "zone": 2}},
+          {"type": "TextEvent", "message": "Insérer blocs tempo si souhaité: ex. 3 x 1 mile à effort 1h"},
+          {"type": "Cooldown", "duration": 1200, "target": {"type": "power", "zone": 1}}
+        ]
+      }
+    },
+    {
+      "id": "hill_short",
+      "name": "Montées courtes (power hills)",
+      "summary": "Séries de montées courtes pour améliorer puissance et cadence.",
+      "purpose": "puissance neuromusculaire, vitesse courte",
+      "effects": "Renforce la force explosive des membres inférieurs, améliore la coordination et fréquence de foulée ; utile pour courses avec changements de pente.",
+      "icu_workout": {
+        "steps": [
+          {"type": "Warmup", "duration": 1200, "target": {"type": "power", "zone": 2}},
+          {"type": "Interval", "reps": 6, "on_duration": 25, "off_duration": 90, "target": {"type": "power", "zone": 6}, "notes": "pente 4-10% si possible; jog retour"},
+          {"type": "Cooldown", "duration": 600, "target": {"type": "power", "zone": 1}}
+        ]
+      }
+    },
+    {
+      "id": "hill_long",
+      "name": "Montées longues / Seuil en côte",
+      "summary": "Répétitions en côtes plus longues visant un effort proche du seuil en montée.",
+      "purpose": "seuil, puissance répétée",
+      "effects": "Améliore la capacité à maintenir efforts proches du seuil en condition de fatigue, renforce les muscles extenseurs et améliore la tolérance lactique dans des conditions de pente.",
+      "icu_workout": {
+        "steps": [
+          {"type": "Warmup", "duration": 900, "target": {"type": "power", "zone": 2}},
+          {"type": "Interval", "reps": 8, "on_duration": 180, "off_duration": 60, "target": {"type": "power", "zone": 4}, "notes": "côtes 6-10% si tapis"},
+          {"type": "Cooldown", "duration": 900, "target": {"type": "power", "zone": 1}}
+        ]
+      }
+    },
+    {
+      "id": "vo2_short",
+      "name": "Intervalles VO2max (courts)",
+      "summary": "Courtes répétitions à intensité VO2max pour augmenter la puissance aérobie maximale.",
+      "purpose": "VO2max et vitesse aérobie",
+      "effects": "Augmente le VO2max, la capacité de transport d'oxygène et la puissance aérobie ; améliore la vitesse sur courtes distances et la capacité de récupération entre efforts intenses.",
+      "icu_workout": {
+        "steps": [
+          {"type": "Warmup", "duration": 600, "target": {"type": "power", "zone": 2}},
+          {"type": "Set", "sets": 3, "interval": {"reps": 6, "on_duration": 60, "off_duration": 60, "target": {"type": "power", "zone": 6}}, "between_sets_rest": 180},
+          {"type": "Cooldown", "duration": 600, "target": {"type": "power", "zone": 1}}
+        ]
+      }
+    },
+    {
+      "id": "threshold",
+      "name": "Intervalles seuil (Threshold)",
+      "summary": "Blocs à intensité seuil pour augmenter la puissance soutenue sur 1h.",
+      "purpose": "améliorer le seuil (effort ~1h)",
+      "effects": "Augmente la capacité à maintenir un pourcentage élevé de FTP/effort 1h, améliore l'économie à intensités élevées et repousse la fatigue métabolique.",
+      "icu_workout": {
+        "steps": [
+          {"type": "Warmup", "duration": 900, "target": {"type": "power", "zone": 2}},
+          {"type": "Interval", "reps": 6, "on_duration": 300, "off_duration": 120, "target": {"type": "power", "zone": 5}, "notes": "tenir l'effort seuil (≈ effort 1h)"},
+          {"type": "Cooldown", "duration": 900, "target": {"type": "power", "zone": 1}}
+        ]
+      }
+    },
+    {
+      "id": "repeat_distances",
+      "name": "Fractionné spécifique (400/500/800/1k)",
+      "summary": "Répétitions de distances spécifiques pour travailler la vitesse endurante pour 5k/10k.",
+      "purpose": "vitesse endurante 5k/10k",
+      "effects": "Améliore la vitesse spécifique de course, la tolérance au lactate et l'efficacité à cadences élevées ; utile pour affiner la vitesse cible de compétition.",
+      "icu_workout": {
+        "steps": [
+          {"type": "Warmup", "duration": 900, "target": {"type": "power", "zone": 2}},
+          {"type": "Interval", "reps": 6, "distance": 500, "recovery": 180, "target": {"type": "pace", "description": "5k-pace to 3k-pace"}},
+          {"type": "Cooldown", "duration": 600, "target": {"type": "power", "zone": 1}}
+        ]
+      }
+    },
+    {
+      "id": "tempo_in_long",
+      "name": "Tempo dans sortie longue",
+      "summary": "Blocs tempo insérés dans une sortie longue pour transposer l'effort marathon/1h en conditions de fatigue.",
+      "purpose": "adapter le seuil marathon/1h en fatigue",
+      "effects": "Améliore la capacité à maintenir un effort soutenu en fatigue, renforce la tolérance à l'accumulation de fatigue et la stratégie de nutrition pendant la course.",
+      "icu_workout": {
+        "steps": [
+          {"type": "Warmup", "duration": 1800, "target": {"type": "power", "zone": 2}},
+          {"type": "SteadyState", "duration": 1200, "target": {"type": "pace", "description": "marathon effort"}},
+          {"type": "SteadyState", "duration": 600, "target": {"type": "power", "zone": 2}},
+          {"type": "Cooldown", "duration": 1800, "target": {"type": "power", "zone": 1}}
+        ]
+      }
+    },
+    {
+      "id": "uphill_tm_z2",
+      "name": "Tapis incliné Z2 (Uphill TM)",
+      "summary": "Long block en Z2 sur tapis incliné pour stimulus aérobie élevé sans impact.",
+      "purpose": "stimulus aérobie élevé sans impact",
+      "effects": "Permet de maintenir volume et stimulus aérobie élevé avec moins d'impact ; renforce aussi la musculature en position de côte et améliore la tolérance à la pente.",
+      "icu_workout": {
+        "steps": [
+          {"type": "SteadyState", "duration": 5400, "target": {"type": "power", "zone": 2}, "notes": "tapis incliné 8-12%"}
+        ]
+      }
+    },
+    {
+      "id": "xtrain",
+      "name": "Cross-training structuré",
+      "summary": "Session structurée en cross-training (vélo/elliptique) pour stimulus aérobie et travail de puissance courte.",
+      "purpose": "aérobie sans impact, puissance courte",
+      "effects": "Maintient ou développe la capacité aérobie sans l'impact de la course ; utile en récupération active ou en remplacement de volume running.",
+      "icu_workout": {
+        "steps": [
+          {"type": "Warmup", "duration": 900, "target": {"type": "power", "zone": 2}},
+          {"type": "Interval", "reps": 8, "on_duration": 30, "off_duration": 120, "target": {"type": "power", "zone": 6}},
+          {"type": "Cooldown", "duration": 900, "target": {"type": "power", "zone": 1}}
+        ]
+      }
+    },
+    {
+      "id": "strength",
+      "name": "Renforcement (Mountain Legs)",
+      "summary": "Courte routine de renforcement ciblée sur les jambes et le tronc pour prevention et force spécifique.",
+      "purpose": "force spécifique et prévention",
+      "effects": "Augmente la force et la stabilité, réduit le risque de blessure, améliore la transmission d'appui pendant la course et la capacité à maintenir la technique en fin de séance.",
+      "icu_workout": {
+        "steps": [
+          {"type": "TextEvent", "message": "Routine Mountain Legs: 2x10 squats, 2x20 back extensions, 10-20 step-ups"}
+        ]
+      }
+    }
+    ,
+    {
+      "id": "threshold_ladder",
+      "name": "Seuil — Ladder (10/8/6/4/2)",
+      "summary": "Progression en échelle de durées au seuil pour varier stimulus et tolérance.",
+      "purpose": "variantes de seuil / endurance élevée",
+      "effects": "Expose l'athlète à efforts seuil de durées décroissantes, améliorant la tolérance métabolique et la capacité à répéter efforts proches du FTP avec récup courtes.",
+      "icu_workout": {
+        "steps": [
+          {"type": "Warmup", "duration": 900, "target": {"type": "power", "zone": 2}},
+          {"type": "Interval", "reps": 1, "on_duration": 600, "off_duration": 120, "target": {"type": "power", "zone": 5}, "notes": "10 min @ seuil"},
+          {"type": "Interval", "reps": 1, "on_duration": 480, "off_duration": 120, "target": {"type": "power", "zone": 5}, "notes": "8 min @ seuil"},
+          {"type": "Interval", "reps": 1, "on_duration": 360, "off_duration": 120, "target": {"type": "power", "zone": 5}, "notes": "6 min @ seuil"},
+          {"type": "Interval", "reps": 1, "on_duration": 240, "off_duration": 120, "target": {"type": "power", "zone": 5}, "notes": "4 min @ seuil"},
+          {"type": "Interval", "reps": 1, "on_duration": 120, "off_duration": 120, "target": {"type": "power", "zone": 5}, "notes": "2 min @ seuil"},
+          {"type": "Cooldown", "duration": 900, "target": {"type": "power", "zone": 1}}
+        ]
+      }
+    },
+    {
+      "id": "repeat_mile",
+      "name": "Répétitions 1 mile / 2 miles",
+      "summary": "Blocs de miles ou double-miles à intensité 1h (seuil) pour simuler efforts de course longue distance en segments répétés.",
+      "purpose": "endurance spécifique et seuil long",
+      "effects": "Travaille la capacité à maintenir un effort soutenu sur distance de rep; améliore la gestion de l'allure marathon/half-marathon sous fatigue.",
+      "icu_workout": {
+        "steps": [
+          {"type": "Warmup", "duration": 1200, "target": {"type": "power", "zone": 2}},
+          {"type": "Interval", "reps": 3, "distance": 1609, "recovery": 180, "target": {"type": "pace", "description": "~1h effort"}},
+          {"type": "Cooldown", "duration": 900, "target": {"type": "power", "zone": 1}}
+        ]
+      }
+    },
+    {
+      "id": "speed_ladder",
+      "name": "Speed Ladder (30/60/90/60/30)",
+      "summary": "Pyramide courte pour développer vitesse et tolérance, souvent utilisée en sets ou combinée en séries.",
+      "purpose": "VO2 / vitesse aérobie et répétition de qualité",
+      "effects": "Surcharge neuromusculaire à haute cadence, améliore la capacité à répéter efforts courts et à récupérer rapidement entre répétitions.",
+      "icu_workout": {
+        "steps": [
+          {"type": "Warmup", "duration": 900, "target": {"type": "power", "zone": 2}},
+          {"type": "Interval", "reps": 1, "on_duration": 30, "off_duration": 60, "target": {"type": "power", "zone": 6}},
+          {"type": "Interval", "reps": 1, "on_duration": 60, "off_duration": 60, "target": {"type": "power", "zone": 6}},
+          {"type": "Interval", "reps": 1, "on_duration": 90, "off_duration": 60, "target": {"type": "power", "zone": 6}},
+          {"type": "Interval", "reps": 1, "on_duration": 60, "off_duration": 60, "target": {"type": "power", "zone": 6}},
+          {"type": "Interval", "reps": 1, "on_duration": 30, "off_duration": 60, "target": {"type": "power", "zone": 6}},
+          {"type": "Cooldown", "duration": 600, "target": {"type": "power", "zone": 1}}
+        ]
+      }
+    },
+    {
+      "id": "track_mixed",
+      "name": "Séance piste mixte (800/400/200 / ladders)",
+      "summary": "Séances typiques de piste combinant 800/400/200 ou sets variés pour 5k/10k développement de vitesse endurance.",
+      "purpose": "vitesse spécifique, capacité anaérobie / aérobie mixte",
+      "effects": "Améliore la puissance anaérobie, la tolérance au lactate et la capacité à tenir des allures de 5k–10k; utile pour la vitesse et la répétition en compétition.",
+      "icu_workout": {
+        "steps": [
+          {"type": "Warmup", "duration": 1200, "target": {"type": "power", "zone": 2}},
+          {"type": "Interval", "reps": 4, "distance": 800, "recovery": 240, "target": {"type": "pace", "description": "10k effort"}},
+          {"type": "Interval", "reps": 4, "distance": 400, "recovery": 120, "target": {"type": "pace", "description": "5k effort"}},
+          {"type": "Interval", "reps": 4, "distance": 200, "recovery": 60, "target": {"type": "pace", "description": "3k effort"}},
+          {"type": "Cooldown", "duration": 900, "target": {"type": "power", "zone": 1}}
+        ]
+      }
+    }
+  ]
+}
