@@ -13,7 +13,7 @@ let allWorkouts = [];
 // On GitHub Pages we load the enriched library automatically. The select allows switching if multiple libs are present.
 const librarySelect = document.getElementById('librarySelect');
 async function loadSelectedLibrary(){
-  const fname = librarySelect.value;
+  const fname = librarySelect ? librarySelect.value : 'workout_library_enriched.json';
   try{
     const resp = await fetch(fname);
     if(!resp.ok) throw new Error('Impossible de charger '+fname+': '+resp.status);
@@ -25,8 +25,8 @@ async function loadSelectedLibrary(){
   }
 }
 if(librarySelect) librarySelect.addEventListener('change', ()=> loadSelectedLibrary());
-//-load default on page load
-if(librarySelect) loadSelectedLibrary();
+// load default on page load (use default file if no selector)
+loadSelectedLibrary();
 
 // Filter control
 const filterPurpose = document.getElementById('filterPurpose');
