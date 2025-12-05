@@ -15,7 +15,6 @@ async function init(){
     const libJson = await lResp.json();
     library = libJson.library_enriched || libJson.library || [];
     renderPlansList();
-    populateWorkoutPick();
   }catch(err){
     alert('Erreur initialisation plans UI: '+err.message);
   }
@@ -24,19 +23,21 @@ async function init(){
 function renderPlansList(){
   plansList.innerHTML = '';
   plansIndex.forEach(p=>{
+    // only include French plans (files with _fr in filename)
+    if(!p.filename || !p.filename.toLowerCase().includes('_fr')) return;
     const li = document.createElement('li');
     li.textContent = p.title;
     li.dataset.filename = p.filename;
-      li.classList.add('selectable');
-      li.style.listStyle='none';
-      li.style.padding='10px';
-      li.style.cursor='pointer';
-      li.addEventListener('click', ()=>{
-        // visual selection
-        document.querySelectorAll('#plansList li.selected').forEach(el=>el.classList.remove('selected'));
-        li.classList.add('selected');
-        selectPlan(p.filename,p.title);
-      });
+    li.classList.add('selectable');
+    li.style.listStyle='none';
+    li.style.padding='10px';
+    li.style.cursor='pointer';
+    li.addEventListener('click', ()=>{
+      // visual selection
+      document.querySelectorAll('#plansList li.selected').forEach(el=>el.classList.remove('selected'));
+      li.classList.add('selected');
+      selectPlan(p.filename,p.title);
+    });
     plansList.appendChild(li);
   });
 }
@@ -67,23 +68,14 @@ async function selectPlan(filename,title){
     const resp = await fetch(filename);
     if(!resp.ok) throw new Error('Impossible de charger '+filename+' ('+resp.status+')');
     const md = await resp.text();
-    document.getElementById('planMarkdown').innerHTML = marked.parse(md);
+    document.getElementById('planMarkdown').innerHTML = '<div class="content">'+marked.parse(md)+'</div>';
   }catch(err){
     document.getElementById('planMarkdown').textContent = 'Erreur chargement plan: '+err.message;
   }
   renderAttachedWorkouts();
 }
 
-function populateWorkoutPick(){
-  const sel = document.getElementById('workoutPick');
-  sel.innerHTML = '';
-  library.forEach(w=>{
-    const opt = document.createElement('option');
-    opt.value = w.external_id || w.name;
-    opt.textContent = w.name;
-    sel.appendChild(opt);
-  });
-}
+// populateWorkoutPick removed — adding workouts to plans is disabled
 
 function renderAttachedWorkouts(){
   const ul = document.getElementById('attachedWorkouts');
@@ -101,14 +93,7 @@ function renderAttachedWorkouts(){
   });
 }
 
-function addWorkout(){
-  if(!currentPlan) return alert('Sélectionne un plan d\'abord');
-  const sel = document.getElementById('workoutPick');
-  const id = sel.value;
-  if(!plansMeta[currentPlan]) plansMeta[currentPlan]={workouts:[]};
-  if(!plansMeta[currentPlan].workouts.includes(id)) plansMeta[currentPlan].workouts.push(id);
-  renderAttachedWorkouts();
-}
+// addWorkout removed
 
 function removeAttached(id){
   if(!currentPlan) return;
@@ -117,15 +102,6 @@ function removeAttached(id){
   renderAttachedWorkouts();
 }
 
-function downloadMeta(){
-  const content = JSON.stringify(plansMeta, null, 2);
-  const blob = new Blob([content], {type: 'application/json'});
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = 'plans_meta.json'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-}
-
-document.getElementById('addWorkout').addEventListener('click', addWorkout);
-document.getElementById('downloadMeta').addEventListener('click', downloadMeta);
+// downloadMeta and related event listeners removed
 
 init();
