@@ -9,79 +9,49 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header>
-    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
-      <div style="display:flex;align-items:center;gap:14px">
-        <nav aria-label="Main navigation" id="header-nav">
-          <a href="index.html">Entraînements</a>
-          <a href="plans.html">Plans d'entraînement</a>
-        </nav>
-      </div>
-      <div class="controls" style="margin-left:auto;display:flex;gap:8px;align-items:center">
-        <label for="librarySelect">Bibliothèque :</label>
-        <select id="librarySelect">
-          <option value="workout_library_enriched.json">workout_library_enriched.json</option>
-        </select>
-        <input id="search" placeholder="Rechercher par nom, type ou tag" />
-        <select id="filterPurpose" title="Filtrer par objectif">
-          <option value="">Tous les objectifs</option>
-        </select>
-        <div id="multiFilter" class="multi-filter">
-          <button id="toggleFilters">Filtres objectifs ▾</button>
-          <div id="filterList" class="filter-list hidden"></div>
+  <header class="section">
+    <div class="container">
+      <div class="level">
+        <div class="level-left">
+          <nav class="level-item" aria-label="Main navigation" id="header-nav">
+            <a href="index.html" class="button is-white">Plans d'entraînement</a>
+            <a href="workouts.html" class="button is-light">Entraînements</a>
+          </nav>
         </div>
       </div>
     </div>
   </header>
-  <main>
-    <aside id="listPane">
-      <ul id="workoutList"></ul>
-      <div class="list-actions">
-        <button id="selectAll">Tout sélectionner</button>
-        <button id="clearSelection">Tout désélectionner</button>
-        <button id="exportSelectedBulk">Exporter sélection (events/bulk ZWO)</button>
+
+  <main class="section">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-half">
+          <div class="box has-text-centered">
+            <h2 class="title is-4">Plans disponibles</h2>
+            <div id="plansListWrapper">
+              <ul id="plansList"></ul>
+            </div>
+            <div id="planViewPlaceholder" class="placeholder">Sélectionne un plan pour l'afficher</div>
+            <div id="planDetail" class="hidden">
+              <button id="backToList" class="button is-small is-light" style="margin-bottom:12px">← Retour à la liste des plans</button>
+              <h2 id="planTitle"></h2>
+              <div class="plan-actions" style="margin-bottom:12px">
+                <label for="workoutPick">Ajouter workout :</label>
+                <div class="select"><select id="workoutPick"></select></div>
+                <button id="addWorkout" class="button is-small">Ajouter au plan</button>
+                <button id="downloadMeta" class="button is-small">Télécharger meta JSON</button>
+              </div>
+              <div id="planMarkdown"></div>
+              <h3>Workouts associés</h3>
+              <ul id="attachedWorkouts"></ul>
+            </div>
+          </div>
+        </div>
       </div>
-    </aside>
-    <section id="detailPane">
-      <div id="empty" class="placeholder">Sélectionnez un workout pour voir les détails</div>
-      <div id="workoutDetail" class="hidden">
-        <header class="section">
-          <div class="container">
-            <div class="level">
-              <div class="level-left">
-                <nav class="level-item" aria-label="Main navigation" id="header-nav">
-                  <a href="index.html" class="button is-white">Plans d'entraînement</a>
-                  <a href="workouts.html" class="button is-light">Entraînements</a>
-                </nav>
-              </div>
-            </div>
-          </div>
-        </header>
-        <main class="section">
-          <div class="container">
-            <div class="columns is-centered">
-              <div class="column is-half">
-                <div class="box has-text-centered">
-                  <h2 class="title is-4">Plans disponibles</h2>
-                  <div id="plansListWrapper">
-                    <ul id="plansList"></ul>
-                  </div>
-                  <div id="planViewPlaceholder" class="placeholder">Sélectionne un plan pour l'afficher</div>
-                  <div id="planDetail" class="hidden">
-                    <button id="backToList" class="button is-small is-light" style="margin-bottom:12px">← Retour à la liste des plans</button>
-                    <h2 id="planTitle"></h2>
-                    <div class="plan-actions" style="margin-bottom:12px">
-                      <label for="workoutPick">Ajouter workout :</label>
-                      <div class="select"><select id="workoutPick"></select></div>
-                      <button id="addWorkout" class="button is-small">Ajouter au plan</button>
-                      <button id="downloadMeta" class="button is-small">Télécharger meta JSON</button>
-                    </div>
-                    <div id="planMarkdown"></div>
-                    <h3>Workouts associés</h3>
-                    <ul id="attachedWorkouts"></ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </main>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="plans.js"></script>
+</body>
+</html>
