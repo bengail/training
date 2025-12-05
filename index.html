@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SWAP Workouts Viewer</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>SWAP — Visualiseur de Workouts</h1>
+    <div class="controls">
+      <label for="librarySelect">Bibliothèque :</label>
+      <select id="librarySelect">
+        <option value="workout_library_enriched.json">workout_library_enriched.json</option>
+      </select>
+      <input id="search" placeholder="Rechercher par nom, type ou tag" />
+      <select id="filterPurpose" title="Filtrer par objectif">
+        <option value="">Tous les objectifs</option>
+      </select>
+      <div id="multiFilter" class="multi-filter">
+        <button id="toggleFilters">Filtres objectifs ▾</button>
+        <div id="filterList" class="filter-list hidden"></div>
+      </div>
+      <a href="plans.html" class="btn">Voir les plans</a>
+      </div>
+  </header>
+  <main>
+    <aside id="listPane">
+      <ul id="workoutList"></ul>
+      <div class="list-actions">
+        <button id="selectAll">Tout sélectionner</button>
+        <button id="clearSelection">Tout désélectionner</button>
+        <button id="exportSelectedBulk">Exporter sélection (events/bulk ZWO)</button>
+      </div>
+    </aside>
+    <section id="detailPane">
+      <div id="empty" class="placeholder">Sélectionnez un workout pour voir les détails</div>
+      <div id="workoutDetail" class="hidden">
+        <h2 id="wName"></h2>
+            <div class="detail-actions">
+              <button id="exportJson">Exporter JSON (Intervals.icu)</button>
+              <button id="exportZwo">Exporter ZWO (Zwift XML)</button>
+            </div>
+        <div class="meta">
+          <span id="wCategory"></span>
+          <span id="wType"></span>
+          <span id="wDate"></span>
+          <span id="wExternal"></span>
+        </div>
+        <h3>But / Objectif</h3>
+        <p id="wPurpose"></p>
+        <h3>Résumé</h3>
+        <p id="wSummary"></p>
+        <h3>Effets physiologiques</h3>
+        <p id="wEffects"></p>
+        <h3>Description / Notes</h3>
+        <pre id="wDescription"></pre>
+        <h3>Structure (steps)</h3>
+        <div id="wSteps"></div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <small>Fichier chargé : <span id="loadedFile">aucun</span></small>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SWAP — Plans</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>SWAP — Plans</h1>
+    <nav><a href="index.html">Retour bibliothèque</a></nav>
+  </header>
+  <main>
+    <aside id="plansListPane">
+      <h2>Plans disponibles</h2>
+      <ul id="plansList"></ul>
+    </aside>
+    <section id="planDetailPane">
+      <div id="planViewPlaceholder">Sélectionne un plan pour l'afficher</div>
+      <div id="planDetail" class="hidden">
+        <h2 id="planTitle"></h2>
+        <div class="plan-actions">
+          <label for="workoutPick">Ajouter workout :</label>
+          <select id="workoutPick"></select>
+          <button id="addWorkout">Ajouter au plan</button>
+          <button id="downloadMeta">Télécharger meta JSON</button>
+        </div>
+        <div id="planMarkdown"></div>
+        <h3>Workouts associés</h3>
+        <ul id="attachedWorkouts"></ul>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="plans.js"></script>
+</body>
+</html>
