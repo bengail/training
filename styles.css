@@ -1,12 +1,12 @@
 *{box-sizing:border-box;font-family:Inter, system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif}
 :root{
-	--bg: #f4f8fb;
+	--bg: #f3f8fd;
 	--panel: #ffffff;
-	--text: #0f304d;
-	--muted: #5b718a;
-	--border: #d9e9f7;
-	--accent: #d7ecff; /* selected */
-	--hover: #eaf4ff;
+	--text: #082434; /* darker blue for better contrast */
+	--muted: #516b81;
+	--border: #cfe7fb;
+	--accent: #bfe6ff; /* selected */
+	--hover: #e6f5ff;
 }
 body{margin:0;background:var(--bg);color:var(--text)}
 header{display:flex;align-items:center;justify-content:space-between;padding:16px 24px;background:var(--panel);border-bottom:1px solid var(--border)}
@@ -38,3 +38,14 @@ pre{white-space:pre-wrap;background:#f7fbff;padding:12px;border-radius:8px;borde
 .list-actions{display:none}
 footer{padding:12px 24px;background:var(--panel);border-top:1px solid var(--border);color:#415b77}
 @media(max-width:800px){#listPane{display:none}main{flex-direction:column}header{flex-direction:column;align-items:flex-start;gap:8px}}
+
+/* Nav/link active override to match theme */
+header nav a{color:var(--text);text-decoration:none;padding:6px 10px;border-radius:6px;transition:background .12s ease,color .12s ease}
+header nav a.active{background:var(--text);color:#fff}
+header nav a:hover{background:var(--hover)}
+
+/* Slightly larger content area for readability */
+#detailPane{padding:28px}
+
+/* Improve focus styles for keyboard navigation */
+a:focus, button:focus, input:focus, select:focus{outline:3px solid rgba(11,33,64,0.06);outline-offset:2px}

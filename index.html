@@ -4,26 +4,35 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>SWAP Workouts Viewer</title>
+  <!-- Minimal modern framework (Pico.css) for clean, lightweight UI -->
+  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <header>
-    <h1>SWAP — Visualiseur de Workouts</h1>
-    <div class="controls">
-      <label for="librarySelect">Bibliothèque :</label>
-      <select id="librarySelect">
-        <option value="workout_library_enriched.json">workout_library_enriched.json</option>
-      </select>
-      <input id="search" placeholder="Rechercher par nom, type ou tag" />
-      <select id="filterPurpose" title="Filtrer par objectif">
-        <option value="">Tous les objectifs</option>
-      </select>
-      <div id="multiFilter" class="multi-filter">
-        <button id="toggleFilters">Filtres objectifs ▾</button>
-        <div id="filterList" class="filter-list hidden"></div>
+    <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
+      <div style="display:flex;align-items:center;gap:14px">
+        <h1>SWAP</h1>
+        <nav aria-label="Main navigation">
+          <a href="index.html">Bibliothèque</a>
+          <a href="plans.html">Plans</a>
+        </nav>
       </div>
-      <a href="plans.html" class="btn">Voir les plans</a>
+      <div class="controls" style="margin-left:auto;display:flex;gap:8px;align-items:center">
+        <label for="librarySelect">Bibliothèque :</label>
+        <select id="librarySelect">
+          <option value="workout_library_enriched.json">workout_library_enriched.json</option>
+        </select>
+        <input id="search" placeholder="Rechercher par nom, type ou tag" />
+        <select id="filterPurpose" title="Filtrer par objectif">
+          <option value="">Tous les objectifs</option>
+        </select>
+        <div id="multiFilter" class="multi-filter">
+          <button id="toggleFilters">Filtres objectifs ▾</button>
+          <div id="filterList" class="filter-list hidden"></div>
+        </div>
       </div>
+    </div>
   </header>
   <main>
     <aside id="listPane">
@@ -66,5 +75,19 @@
   </footer>
 
   <script src="app.js"></script>
+  <script>
+    // Highlight the active nav link (simple, works on GitHub Pages)
+    (function(){
+      try{
+        const anchors = document.querySelectorAll('header nav a');
+        anchors.forEach(a=>{
+          const href = a.getAttribute('href');
+          if(window.location.pathname.endsWith(href) || window.location.pathname===('/'+href)){
+            a.classList.add('active');
+          }
+        });
+      }catch(e){/*ignore*/}
+    })();
+  </script>
 </body>
 </html>
