@@ -24,20 +24,23 @@ async function loadSelectedLibrary(){
     alert('Erreur chargement library: '+err.message);
   }
 }
-librarySelect.addEventListener('change', ()=> loadSelectedLibrary());
+if(librarySelect) librarySelect.addEventListener('change', ()=> loadSelectedLibrary());
 //-load default on page load
-loadSelectedLibrary();
+if(librarySelect) loadSelectedLibrary();
 
 // Filter control
 const filterPurpose = document.getElementById('filterPurpose');
-filterPurpose.addEventListener('change', ()=>applyFilters());
+if(filterPurpose) filterPurpose.addEventListener('change', ()=>applyFilters());
 
-search.addEventListener('input', ()=>{
+if(search) search.addEventListener('input', ()=>{
   const q = search.value.trim().toLowerCase();
   if(!q) filtered = workouts.slice();
   else filtered = workouts.filter(w => (w.name||'').toLowerCase().includes(q) || (w.type||'').toLowerCase().includes(q) || (w.category||'').toLowerCase().includes(q));
   renderList();
 });
+
+// helper to detect narrow screens
+function isNarrow(){ return window.innerWidth < 768; }
 
 function normalizeAndRender(json){
   // Expecting either array of events or object with library_intervals
@@ -102,7 +105,8 @@ function renderList(){
   filtered.forEach((w, idx)=>{
     const li = document.createElement('li');
     li.dataset.idx = idx;
-    li.classList.add('selectable');
+    li.classList.add('selectable','box');
+    li.style.marginBottom = '0.5rem';
     const titleDiv = document.createElement('div');
     titleDiv.className = 'title';
     titleDiv.innerHTML = `${escapeHtml(w.name)}`;
@@ -151,6 +155,33 @@ function selectWorkout(idx){
   // attach export handlers
   document.getElementById('exportJson').onclick = ()=>exportAsJson(w);
   document.getElementById('exportZwo').onclick = ()=>exportAsZwo(w);
+
+  // On narrow screens hide the list and show a back button in the detail card
+  const listPane = document.getElementById('listPane');
+  if(isNarrow() && listPane){
+    listPane.style.display = 'none';
+    // create back button if not exists
+    let back = document.getElementById('backToListWorkouts');
+    if(!back){
+      back = document.createElement('button');
+      back.id = 'backToListWorkouts';
+      back.className = 'button is-light is-small';
+      back.textContent = '← Retour à la liste';
+      const detail = document.getElementById('workoutDetail');
+      if(detail && detail.parentNode){
+        detail.parentNode.insertBefore(back, detail);
+      }
+      back.addEventListener('click', ()=>{
+        listPane.style.display = '';
+        back.remove();
+        // scroll into view list
+        listPane.scrollIntoView({behavior:'smooth'});
+        document.getElementById('empty').classList.remove('hidden');
+        detail.classList.add('hidden');
+        document.querySelectorAll('#workoutList li.selected').forEach(el=>el.classList.remove('selected'));
+      });
+    }
+  }
 }
 
 function renderSteps(icu){
