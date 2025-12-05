@@ -27,13 +27,23 @@ function renderPlansList(){
     const li = document.createElement('li');
     li.textContent = p.title;
     li.dataset.filename = p.filename;
-    li.addEventListener('click', ()=>selectPlan(p.filename,p.title));
+    li.classList.add('selectable');
+    li.addEventListener('click', ()=>{
+      // visual selection
+      document.querySelectorAll('#plansList li.selected').forEach(el=>el.classList.remove('selected'));
+      li.classList.add('selected');
+      selectPlan(p.filename,p.title);
+    });
     plansList.appendChild(li);
   });
 }
 
 async function selectPlan(filename,title){
   currentPlan = filename;
+  // ensure visual selection matches
+  document.querySelectorAll('#plansList li.selected').forEach(el=>el.classList.remove('selected'));
+  const sel = document.querySelector('#plansList li[data-filename="'+filename+'"]');
+  if(sel) sel.classList.add('selected');
   document.getElementById('planTitle').textContent = title;
   document.getElementById('planViewPlaceholder').classList.add('hidden');
   document.getElementById('planDetail').classList.remove('hidden');

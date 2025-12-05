@@ -102,12 +102,7 @@ function renderList(){
   filtered.forEach((w, idx)=>{
     const li = document.createElement('li');
     li.dataset.idx = idx;
-    // checkbox for multi-select
-    const chk = document.createElement('input');
-    chk.type = 'checkbox';
-    chk.className = 'item-select';
-    chk.dataset.idx = idx;
-    chk.addEventListener('click', (ev)=>{ ev.stopPropagation(); });
+    li.classList.add('selectable');
     const titleDiv = document.createElement('div');
     titleDiv.className = 'title';
     titleDiv.innerHTML = `${escapeHtml(w.name)}`;
@@ -120,11 +115,15 @@ function renderList(){
     p.className = 'tag';
     p.textContent = w.purpose || inferPurpose(w.name);
     tags.appendChild(p);
-    li.appendChild(chk);
     li.appendChild(titleDiv);
     li.appendChild(subDiv);
     li.appendChild(tags);
-    li.addEventListener('click', ()=>selectWorkout(idx));
+    li.addEventListener('click', ()=>{
+      // visual selection without altering layout
+      document.querySelectorAll('#workoutList li.selected').forEach(el=>el.classList.remove('selected'));
+      li.classList.add('selected');
+      selectWorkout(idx);
+    });
     workoutList.appendChild(li);
   });
 }
@@ -132,6 +131,10 @@ function renderList(){
 function selectWorkout(idx){
   const w = filtered[idx];
   if(!w) return;
+  // ensure list highlight matches selection (in case of programmatic select)
+  document.querySelectorAll('#workoutList li.selected').forEach(el=>el.classList.remove('selected'));
+  const selLi = document.querySelector('#workoutList li[data-idx="'+idx+'"]');
+  if(selLi) selLi.classList.add('selected');
   document.getElementById('empty').classList.add('hidden');
   const detail = document.getElementById('workoutDetail');
   detail.classList.remove('hidden');
