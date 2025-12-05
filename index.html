@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>SWAP Workouts Viewer</title>
-  <!-- Minimal modern framework (Pico.css) for clean, lightweight UI -->
-  <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@1.*/css/pico.min.css">
+  <title>Plan et bibliothèque de séance — Plans</title>
+  <!-- Bulma framework -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -45,48 +45,43 @@
     <section id="detailPane">
       <div id="empty" class="placeholder">Sélectionnez un workout pour voir les détails</div>
       <div id="workoutDetail" class="hidden">
-        <h2 id="wName"></h2>
-            <div class="detail-actions">
-              <button id="exportJson">Exporter JSON (Intervals.icu)</button>
-              <button id="exportZwo">Exporter ZWO (Zwift XML)</button>
+        <header class="section">
+          <div class="container">
+            <div class="level">
+              <div class="level-left">
+                <nav class="level-item" aria-label="Main navigation" id="header-nav">
+                  <a href="index.html" class="button is-white">Plans d'entraînement</a>
+                  <a href="workouts.html" class="button is-light">Entraînements</a>
+                </nav>
+              </div>
             </div>
-        <div class="meta">
-          <span id="wCategory"></span>
-          <span id="wType"></span>
-          <span id="wDate"></span>
-          <span id="wExternal"></span>
-        </div>
-        <h3>But / Objectif</h3>
-        <p id="wPurpose"></p>
-        <h3>Résumé</h3>
-        <p id="wSummary"></p>
-        <h3>Effets physiologiques</h3>
-        <p id="wEffects"></p>
-        <h3>Description / Notes</h3>
-        <pre id="wDescription"></pre>
-        <h3>Structure (steps)</h3>
-        <div id="wSteps"></div>
-      </div>
-    </section>
-  </main>
-  <footer>
-    <small>Fichier chargé : <span id="loadedFile">aucun</span></small>
-  </footer>
-
-  <script src="app.js"></script>
-  <script>
-    // Highlight the active nav link (simple, works on GitHub Pages)
-    (function(){
-      try{
-        const anchors = document.querySelectorAll('header nav a');
-        anchors.forEach(a=>{
-          const href = a.getAttribute('href');
-          if(window.location.pathname.endsWith(href) || window.location.pathname===('/'+href)){
-            a.classList.add('active');
-          }
-        });
-      }catch(e){/*ignore*/}
-    })();
-  </script>
-</body>
-</html>
+          </div>
+        </header>
+        <main class="section">
+          <div class="container">
+            <div class="columns is-centered">
+              <div class="column is-half">
+                <div class="box has-text-centered">
+                  <h2 class="title is-4">Plans disponibles</h2>
+                  <div id="plansListWrapper">
+                    <ul id="plansList"></ul>
+                  </div>
+                  <div id="planViewPlaceholder" class="placeholder">Sélectionne un plan pour l'afficher</div>
+                  <div id="planDetail" class="hidden">
+                    <button id="backToList" class="button is-small is-light" style="margin-bottom:12px">← Retour à la liste des plans</button>
+                    <h2 id="planTitle"></h2>
+                    <div class="plan-actions" style="margin-bottom:12px">
+                      <label for="workoutPick">Ajouter workout :</label>
+                      <div class="select"><select id="workoutPick"></select></div>
+                      <button id="addWorkout" class="button is-small">Ajouter au plan</button>
+                      <button id="downloadMeta" class="button is-small">Télécharger meta JSON</button>
+                    </div>
+                    <div id="planMarkdown"></div>
+                    <h3>Workouts associés</h3>
+                    <ul id="attachedWorkouts"></ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>

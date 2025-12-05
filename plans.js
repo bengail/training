@@ -27,26 +27,41 @@ function renderPlansList(){
     const li = document.createElement('li');
     li.textContent = p.title;
     li.dataset.filename = p.filename;
-    li.classList.add('selectable');
-    li.addEventListener('click', ()=>{
-      // visual selection
-      document.querySelectorAll('#plansList li.selected').forEach(el=>el.classList.remove('selected'));
-      li.classList.add('selected');
-      selectPlan(p.filename,p.title);
-    });
+      li.classList.add('selectable');
+      li.style.listStyle='none';
+      li.style.padding='10px';
+      li.style.cursor='pointer';
+      li.addEventListener('click', ()=>{
+        // visual selection
+        document.querySelectorAll('#plansList li.selected').forEach(el=>el.classList.remove('selected'));
+        li.classList.add('selected');
+        selectPlan(p.filename,p.title);
+      });
     plansList.appendChild(li);
   });
 }
 
 async function selectPlan(filename,title){
   currentPlan = filename;
-  // ensure visual selection matches
-  document.querySelectorAll('#plansList li.selected').forEach(el=>el.classList.remove('selected'));
-  const sel = document.querySelector('#plansList li[data-filename="'+filename+'"]');
-  if(sel) sel.classList.add('selected');
-  document.getElementById('planTitle').textContent = title;
-  document.getElementById('planViewPlaceholder').classList.add('hidden');
-  document.getElementById('planDetail').classList.remove('hidden');
+    // ensure visual selection matches
+    document.querySelectorAll('#plansList li.selected').forEach(el=>el.classList.remove('selected'));
+    const sel = document.querySelector('#plansList li[data-filename="'+filename+'"]');
+    if(sel) sel.classList.add('selected');
+    // show detail and hide list wrapper for centered layout
+    document.getElementById('planViewPlaceholder').classList.add('hidden');
+    document.getElementById('plansListWrapper').classList.add('hidden');
+    const detail = document.getElementById('planDetail');
+    detail.classList.remove('hidden');
+    document.getElementById('planTitle').textContent = title;
+    // add back button handler
+    const back = document.getElementById('backToList');
+    if(back) back.addEventListener('click', ()=>{
+      detail.classList.add('hidden');
+      document.getElementById('plansListWrapper').classList.remove('hidden');
+      document.getElementById('planViewPlaceholder').classList.remove('hidden');
+      document.querySelectorAll('#plansList li.selected').forEach(el=>el.classList.remove('selected'));
+      currentPlan = null;
+    });
   // load markdown
   try{
     const resp = await fetch(filename);
