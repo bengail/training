@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Plan et bibliothèque de séance — Entraînements</title>
+  <!-- Bulma framework -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="section">
+    <div class="container">
+      <div class="level">
+        <div class="level-left">
+          <nav class="level-item" aria-label="Main navigation" id="header-nav">
+            <a href="index.html" class="button is-white">Plans</a>
+            <a href="workouts.html" class="button is-light">Entraînements</a>
+          </nav>
+        </div>
+        <div class="level-right">
+          <div class="level-item controls">
+            <label for="librarySelect" style="margin-right:6px">Bibliothèque :</label>
+            <div class="select">
+              <select id="librarySelect">
+                <option value="workout_library_enriched.json">workout_library_enriched.json</option>
+              </select>
+            </div>
+            <div style="margin-left:10px;">
+              <input id="search" class="input" placeholder="Rechercher par nom, type ou tag" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="section">
+    <div class="container">
+      <div class="columns">
+        <aside class="column is-one-quarter" id="listPane">
+          <div class="box">
+            <h3 class="title is-5">Liste des séances</h3>
+            <ul id="workoutList"></ul>
+          </div>
+        </aside>
+        <section class="column" id="detailPane">
+          <div id="empty" class="placeholder">Sélectionnez un workout pour voir les détails</div>
+          <div id="workoutDetail" class="card hidden">
+            <header class="card-header"><p id="wName" class="card-header-title"></p></header>
+            <div class="card-content">
+              <div class="content">
+                <div class="meta">
+                  <span id="wCategory"></span>
+                  <span id="wType"></span>
+                  <span id="wDate"></span>
+                  <span id="wExternal"></span>
+                </div>
+                <h4 class="title is-6">But / Objectif</h4>
+                <p id="wPurpose"></p>
+                <h4 class="title is-6">Résumé</h4>
+                <p id="wSummary"></p>
+                <h4 class="title is-6">Effets physiologiques</h4>
+                <p id="wEffects"></p>
+                <h4 class="title is-6">Description / Notes</h4>
+                <pre id="wDescription"></pre>
+                <h4 class="title is-6">Structure (steps)</h4>
+                <div id="wSteps"></div>
+              </div>
+            </div>
+            <footer class="card-footer">
+              <a id="exportJson" class="card-footer-item">Exporter JSON</a>
+              <a id="exportZwo" class="card-footer-item">Exporter ZWO</a>
+            </footer>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+  <footer class="footer"><div class="content has-text-centered"><small>Fichier chargé : <span id="loadedFile">aucun</span></small></div></footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
