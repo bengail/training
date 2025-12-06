@@ -86,3 +86,19 @@ a:focus, button:focus, input:focus, select:focus{outline:3px solid rgba(11,33,64
 
 /* Ensure planMarkdown area has comfortable spacing */
 #planMarkdown{margin-top:12px;text-align:left}
+
+/* Plan header (metadata + TOC) */
+.plan-header{display:flex;flex-direction:column;gap:10px;margin-bottom:10px}
+.plan-header .meta{display:flex;gap:12px;align-items:center;font-size:13px}
+.plan-header .meta strong{font-size:16px}
+.toc{font-size:13px;color:var(--muted)}
+.toc-list{list-style:none;margin:0;padding-left:0;display:flex;flex-direction:column;gap:6px}
+.toc-item{padding-left:0}
+.toc-item a{color:var(--muted);text-decoration:none}
+.toc-item a:hover{color:var(--text);text-decoration:underline}
+
+/* Attached workouts styling */
+#attachedWorkouts{list-style:none;padding-left:0;margin-top:8px}
+.attached-workout{display:flex;align-items:center;gap:8px;padding:8px;border-radius:6px;border:1px solid rgba(200,220,240,0.6);margin-bottom:6px;background:var(--panel)}
+.attached-workout .title{font-weight:600}
+.attached-workout .sub{color:var(--muted);font-size:12px;margin-left:6px}
