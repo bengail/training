@@ -72,3 +72,17 @@ a:focus, button:focus, input:focus, select:focus{outline:3px solid rgba(11,33,64
 	#detailPane{padding-top:12px}
 	#plansListWrapper{display:block}
 }
+
+/* Markdown / content styles (Bulma .content helpers + enhancements) */
+.content{text-align:left;max-width:78ch;margin:0 auto;font-size:15px;color:var(--text);line-height:1.6}
+.content h1,.content h2,.content h3,.content h4{color:var(--text);margin-top:1.2em;margin-bottom:0.5em}
+.content p{margin-bottom:0.9em}
+.content img{max-width:100%;height:auto;border-radius:6px}
+.content pre{background:#0b223340;color:var(--panel);padding:12px;border-radius:6px;overflow:auto}
+.content code{background:#f3fbff;padding:2px 6px;border-radius:4px;font-family:monospace}
+.content table{width:100%;border-collapse:collapse;margin-bottom:1em}
+.content th,.content td{border:1px solid rgba(11,33,64,0.06);padding:8px}
+.content blockquote{border-left:3px solid rgba(11,33,64,0.08);padding-left:12px;color:var(--muted);margin-left:0}
+
+/* Ensure planMarkdown area has comfortable spacing */
+#planMarkdown{margin-top:12px;text-align:left}
